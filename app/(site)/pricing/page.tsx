@@ -4,10 +4,19 @@ import Image from "next/image";
 import { getPrice } from "@/sanity/sanity.query";
 import type { PriceType } from "@/types";
 import { PortableText } from "@portabletext/react";
+import { getServerSession } from "next-auth";
+import { options } from "../api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
+
 
 export default async function Price() {
   const price: PriceType[] = await getPrice();
 
+  const session = await getServerSession(options);
+
+  if (!session) {
+    redirect("/api/auth/signin?callbackUrl=/pricing");
+  }
   return (
     <main className="max-w-7xl mx-auto md:px-16 px-6">
         <section className="mt-32">
