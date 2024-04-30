@@ -55,14 +55,6 @@ export default async function Navbar() {
               </Link>
             </li>
             <li>
-              <Link
-                href="/CreateUser"
-                className="hover:text-purple-400 duration-300"
-              >
-                Create User
-              </Link>
-            </li>
-            <li>
               {session?.user?.name == "admin" ? (
                 <Link href="./studio">Admin Section</Link>
               ) : null}
