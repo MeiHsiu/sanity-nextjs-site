@@ -44,7 +44,8 @@ export const options = {
         console.log("authorizing...");
         const foundUser = await User.findOne({ name: credentials.name })
           .lean()
-          .exec();
+          .exec() as any;
+
 
         if (foundUser) {
           console.log("User Exists");
