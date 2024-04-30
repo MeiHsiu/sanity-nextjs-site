@@ -2,7 +2,6 @@ import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/app/(site)/(models)/User";
 import bcrypt from "bcrypt";
-import { NextResponse } from "next/server";
 
 
 export const options = {
@@ -40,7 +39,7 @@ export const options = {
         placeholder: "your-password",
       },
     },
-    async authorize(credentials) {
+    async authorize(credentials: any) {
       try {
         console.log("authorizing...");
         const foundUser = await User.findOne({ name: credentials.name })
@@ -58,7 +57,7 @@ export const options = {
             console.log("Good Pass");
             delete foundUser.password;
 
-            foundUser["role"] = "Unverified Email";
+            //foundUser["role"] = "Unverified Email";
             return foundUser;
           }
         }
